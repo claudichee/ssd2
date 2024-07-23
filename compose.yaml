@@ -17,7 +17,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock  # Allow Jenkins to communicate with the Docker daemon
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false  # Disable Jenkins setup wizard
-
+      
+        # Git server configuration
+    git: 
+        image: alpine/git 
+        container_name: git 
+        entrypoint: /bin/sh -c "git config --global user.name 'Claudia Chee' && git config --global user.email '2102929@sit.singaporetech.edu.sg' && tail -f /dev/null"
 
 
   # SonarQube service configuration
@@ -43,8 +48,3 @@ services:
 volumes:
   jenkins_home:  # Define a Docker volume to persist Jenkins data
 
-# Git server configuration
-git: 
-    image: alpine/git 
-    container_name: git 
-    entrypoint: /bin/sh -c "git config --global user.name 'Claudia Chee' && git config --global user.email '2102929@sit.singaporetech.edu.sg' && tail -f /dev/null"
