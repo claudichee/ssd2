@@ -6,9 +6,6 @@ services:
     build: 
       context: ./jenkins  # Path to the Jenkins Dockerfile directory
       dockerfile: Dockerfile  # Name of the Dockerfile for Jenkins
-      args:
-        GIT_USER_NAME: "CLAUDIA CHEE XIN LIN"  
-        GIT_USER_EMAIL: "2102929@sit.singaporetech.edu.sg"  
     ports:
       - "8080:8080"  # Map host port 8080 to container port 8080 for Jenkins web interface
       - "50000:50000"  # Map host port 50000 to container port 50000 for Jenkins agent communication
@@ -18,12 +15,6 @@ services:
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false  # Disable Jenkins setup wizard
       
-        # Git server configuration
-    git: 
-        image: alpine/git 
-        container_name: git 
-        entrypoint: /bin/sh -c "git config --global user.name 'Claudia Chee' && git config --global user.email '2102929@sit.singaporetech.edu.sg' && tail -f /dev/null"
-
 
   # SonarQube service configuration
   sonarqube:
@@ -48,3 +39,8 @@ services:
 volumes:
   jenkins_home:  # Define a Docker volume to persist Jenkins data
 
+ # Git server configuration
+    git: 
+        image: alpine/git 
+        container_name: git 
+        entrypoint: /bin/sh -c "git config --global user.name 'Claudia Chee' && git config --global user.email '2102929@sit.singaporetech.edu.sg' && tail -f /dev/null"
